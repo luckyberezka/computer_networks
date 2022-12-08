@@ -133,7 +133,7 @@ ip 10.0.20.1 255.255.255.0 10.0.20.42
 
 ### Второй случай
 
-![image info](topology_2.jpg)
+![image info](topology_2jpg.jpg)
 
 
-![image info](test_2jpg.jpg)
+![image info](test_2.jpg)
