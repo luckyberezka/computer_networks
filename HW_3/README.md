@@ -1,4 +1,4 @@
-'''
+```
 
 Router(config)#int e0/0.10
 Router(config-subif)#ip dhcp pool VLAN10POOL
@@ -34,4 +34,4 @@ Router(config-subif)#exit
 Router(config)#ip nat inside source list 100 pool NATPOOL
 Router(config)#exit
 
-'''
+```
