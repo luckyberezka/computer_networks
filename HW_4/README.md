@@ -43,6 +43,10 @@ Router(config-if)#tunnel destination 192.168.30.2
 Router(config-if)#ip mtu 1400
 Router(config-if)#ip tcp adjust-mss 1360
 Router(config-if)#exit
+Router(config)#crypto ipsec transform-set AES128-SHA esp-aes esp-sha-hmac
+Router(cfg-crypto-trans)#mode transport
+Router(cfg-crypto-trans)#exit
+Router(config)#access-list 101 permit gre host 192.168.10.2 host 192.168.30.2
 Router(config)#exit
 
 
@@ -100,6 +104,10 @@ Router(config-if)#tunnel destination 192.168.10.2
 Router(config-if)#ip mtu 1400
 Router(config-if)#ip tcp adjust-mss 1360
 Router(config-if)#exit
+Router(config)#crypto ipsec transform-set AES128-SHA esp-aes esp-sha-hmac
+Router(cfg-crypto-trans)#mode transport
+Router(cfg-crypto-trans)#exit
+Router(config)#access-list 101 permit gre host 192.168.30.2 host 192.168.10.2
 Router(config)#exit
 
 
