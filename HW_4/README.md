@@ -24,8 +24,10 @@ Router(config-if)#no shutdown
 Router(config-if)#ip address 192.168.10.2 255.255.255.0
 Router(config-if)#description R4
 Router(config-if)#exit
+Router(config)#ip route 0.0.0.0 0.0.0.0 192.168.10.1
+Router(config)#ip route 10.0.20.2 255.255.255.255 10.1.10.2
+Router(config)#ip route 10.0.30.2 255.255.255.255 10.2.10.2
 Router(config)#exit
-Router#wr
 
 
 ```
@@ -44,6 +46,8 @@ Router(config-if)#no shutdown
 Router(config-if)#description VPC_2
 Router(config-if)#ip address 10.0.20.1 255.255.255.0
 Router(config-if)#exit
+Router(config)#ip route 0.0.0.0 0.0.0.0 192.168.20.1
+Router(config)#ip route 10.0.10.2 255.255.255.255 10.1.10.1
 Router(config)#exit
 
 
@@ -62,6 +66,8 @@ Router(config-if)#description VPC_3
 Router(config-if)#no shutdown
 Router(config-if)#ip address 10.0.30.1 255.255.255.0
 Router(config-if)#exit
+Router(config)#ip route 0.0.0.0 0.0.0.0 192.168.30.1
+Router(config)#ip route 10.0.10.2 255.255.255.255 10.2.10.1
 Router(config)#exit
 
 
@@ -91,6 +97,28 @@ Router(config)#exit
 
 ```
 
+5) VPC_1 (Client)
 
+```
+
+VPCS> ip 10.0.10.2 255.255.255.0 10.0.10.1
+
+```
+
+6) VPC_2 (Client)
+
+```
+
+VPCS> ip 10.0.20.2 255.255.255.0 10.0.20.1
+
+```
+
+7) VPC_3 (Client)
+
+```
+
+VPCS> ip 10.0.30.2 255.255.255.0 10.0.30.1
+
+```
 ## Проверка работоспособности
 
