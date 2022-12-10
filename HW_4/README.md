@@ -43,10 +43,25 @@ Router(config-if)#tunnel destination 192.168.30.2
 Router(config-if)#ip mtu 1400
 Router(config-if)#ip tcp adjust-mss 1360
 Router(config-if)#exit
-Router(config)#crypto ipsec transform-set AES128-SHA esp-aes esp-sha-hmac
-Router(cfg-crypto-trans)#mode transport
-Router(cfg-crypto-trans)#exit
 Router(config)#access-list 101 permit gre host 192.168.10.2 host 192.168.30.2
+Router(config)#crypto isakmp policy 10
+Router(config-isakmp)#encryption aes
+Router(config-isakmp)#authentication pre-share
+Router(config-isakmp)#group 5
+Router(config-isakmp)#hash sha
+Router(config-isakmp)#exit
+Router(config)#crypto isakmp key secret123 address 192.168.30.2
+Router(config)#$c transform-set UNIT-IPSEC-TRANS esp-aes 256 esp-sha-hmac
+Router(cfg-crypto-trans)#mode transport
+Router(cfg-crypto-trans)#ex
+Router(config)#crypto map GRE-IPSEC-CRYPTO-MAP 10 ipsec-isakmp
+Router(config-crypto-map)#set peer 192.168.30.2
+Router(config-crypto-map)#set transform-set UNIT-IPSEC-TRANS
+Router(config-crypto-map)#match address 101
+Router(config-crypto-map)#ex
+Router(config)#int e0/1
+Router(config-if)#crypto map GRE-IPSEC-CRYPTO-MAP
+Router(config-if)#exit
 Router(config)#exit
 
 
@@ -104,12 +119,25 @@ Router(config-if)#tunnel destination 192.168.10.2
 Router(config-if)#ip mtu 1400
 Router(config-if)#ip tcp adjust-mss 1360
 Router(config-if)#exit
-Router(config)#crypto ipsec transform-set AES128-SHA esp-aes esp-sha-hmac
-Router(cfg-crypto-trans)#mode transport
-Router(cfg-crypto-trans)#exit
 Router(config)#access-list 101 permit gre host 192.168.30.2 host 192.168.10.2
-Router(config)#exit
-
+Router(config)#crypto isakmp policy 10
+Router(config-isakmp)#encryption aes
+Router(config-isakmp)#authentication pre-share
+Router(config-isakmp)#group 5
+Router(config-isakmp)#hash sha
+Router(config-isakmp)#ex
+Router(config)#crypto isakmp key secret123 address 192.168.10.2
+Router(config)#crypto ipsec transform-set HQ-IPSEC-TRANS esp-aes 256 esp-sha-h$
+Router(cfg-crypto-trans)#mode transport
+Router(cfg-crypto-trans)#ex
+Router(config)#crypto map GRE-IPSEC-CRYPTO-MAP 10 ipsec-isakmp
+Router(config-crypto-map)#set peer 192.168.10.2
+Router(config-crypto-map)#set transform-set HQ-IPSEC-TRANS
+Router(config-crypto-map)#match address 101
+Router(config-crypto-map)#ex
+Router(config)#int e0/0
+Router(config-if)#crypto map GRE-IPSEC-CRYPTO-MAP
+Router(config-if)#exit
 
 ```
 
