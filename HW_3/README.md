@@ -136,7 +136,7 @@ Router(config-subif)#exit
 Router(config)#int e0/0.20
 Router(config-subif)#ip nat inside
 Router(config-subif)#exit
-Router(config)#ip nat inside source list 100 e0/2 overload
+Router(config)#ip nat inside source list 100 int e0/2 overload
 Router(config)#exit
 
 ```
