@@ -127,7 +127,7 @@ Router(config-isakmp)#group 5
 Router(config-isakmp)#hash sha
 Router(config-isakmp)#ex
 Router(config)#crypto isakmp key secret123 address 192.168.10.2
-Router(config)#crypto ipsec transform-set HQ-IPSEC-TRANS esp-aes 256 esp-sha-h$
+Router(config)#crypto ipsec transform-set HQ-IPSEC-TRANS esp-aes 256 esp-sha-hmac
 Router(cfg-crypto-trans)#mode transport
 Router(cfg-crypto-trans)#ex
 Router(config)#crypto map GRE-IPSEC-CRYPTO-MAP 10 ipsec-isakmp
