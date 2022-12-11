@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+import ipaddress
 import validators
 
 
@@ -39,6 +40,11 @@ def main():
     args = parser.parse_args()
     host = args.host
     if not validators.domain(host):
+        print('Invalid host!')
+        exit(1)
+    try:
+        ipaddress.ip_address(host)
+    except Exception:
         print('Invalid host!')
         exit(1)
     print('MTU is {}'.format(mtu_get(host) + 28))
