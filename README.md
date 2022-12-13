@@ -16,7 +16,24 @@ Router(config-if)#exit
 Router(config)#int e0/2
 Router(config-if)#no shutdown
 Router(config-if)#ip address 211.211.3.1 255.255.255.0
+Router(config-if)#ex
+
+
+```
+
+
+R1 
+
+```
+Router(config)#int e0/1
+Router(config-if)#no shutdown
+Router(config-if)#ip address 10.0.10.1 255.255.255.0
 Router(config-if)#exit
+Router(config)#int e0/2
+Router(config-if)#no shutdown
+Router(config-if)#ip address 211.211.1.2 255.255.255.0
+Router(config-if)#exit
+Router(config)#ip route 0.0.0.0 0.0.0.0 211.211.1.1
 Router(config)#ip route 10.0.20.2 255.255.255.255 10.100.10.2
 Router(config)#ip route 10.0.30.2 255.255.255.255 10.200.10.2
 Router(config)#int tunnel 0
@@ -45,23 +62,6 @@ Router(config-if)#ip tcp adjust-mss 1360
 Router(config-if)#exit
 Router(config)#exit
 
-
-```
-
-
-R1 
-
-```
-Router(config)#int e0/1
-Router(config-if)#no shutdown
-Router(config-if)#ip address 10.0.10.1 255.255.255.0
-Router(config-if)#exit
-Router(config)#int e0/2
-Router(config-if)#no shutdown
-Router(config-if)#ip address 211.211.1.2 255.255.255.0
-Router(config-if)#exit
-Router(config)#ip route 0.0.0.0 0.0.0.0 211.211.1.1
-Router(config)#exit
 ```
 
 R4
