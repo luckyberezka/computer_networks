@@ -60,7 +60,43 @@ Router(config-if)#
 Router(config-if)#ip mtu 1400
 Router(config-if)#ip tcp adjust-mss 1360
 Router(config-if)#exit
+Router(config)#crypto isakmp policy 1
+Router(config-isakmp)#ecryption aes
+                       ^
+% Invalid input detected at '^' marker.
+
+Router(config-isakmp)#encryption aes
+Router(config-isakmp)#authentication pre-shark
+                                             ^
+% Invalid input detected at '^' marker.
+
+Router(config-isakmp)#authentication pre-share
+Router(config-isakmp)#group 2
+Router(config-isakmp)#hash sha
+Router(config-isakmp)#exit
+Router(config)#crypto isakmp key annjjjik address 211.211.3.2
+Router(config)#crypto ipsec transform-set IPSEC-SET esp-aes 256 esp-sha-hmac
+Router(cfg-crypto-trans)#mode transport
+Router(cfg-crypto-trans)#exit
+Router(config)#crypto map FIRSTMAP 10 ipsec-isakmp
+% NOTE: This new crypto map will remain disabled until a peer
+        and a valid access list have been configured.
+Router(config-crypto-map)#set peer 211.211.3.2
+Router(config-crypto-map)#ser transform-set IPSEC-SET
+                            ^
+% Invalid input detected at '^' marker.
+
+Router(config-crypto-map)#set transform-set IPSEC-SET
+Router(config-crypto-map)#match address 101
+Router(config-crypto-map)#exit
+Router(config)#access-list 101 permit gre host 211.211.1.2 host 211.211.3.2
+Router(config)#int e0/2
+Router(config-if)#crypto map FIRSTMAP
+Router(config-if)#ex
+*Dec 13 19:39:47.144: %CRYPTO-6-ISAKMP_ON_OFF: ISAKMP is ON
+Router(config-if)#exit
 Router(config)#exit
+
 
 ```
 
