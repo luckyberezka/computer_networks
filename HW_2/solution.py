@@ -16,6 +16,16 @@ def mtu_get(host):
 
     left_border = 0
     right_border = 8973
+    
+    
+    process = subprocess.run(
+        ["ping", host, '-M', 'do', '-s', str(0), '-c', '1'],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
+    if process.returncode != 0:
+        print('HOST NOT RESPONSE!')
+        exit(1)
 
     while left_border != right_border and left_border < right_border - 1:
         middle_value = (left_border + right_border) // 2
